@@ -1,15 +1,13 @@
-clear all;
-clc;
-%units:m,kg,s£¬deg
+#units:m,kg,sï¿½ï¿½deg
 disp('resluts include; actual releasing angle, x-axis releasing velocity, y-axisreleasing velocity')
 disp('combined releasing velocity, releasing time')
 disp('the maximum height of ball flying, the distance of ball flying, the landing time of ball')
-global params;
+
 params.flag1=0;
 params.flag2=0;
 params.flag3=0;
 params.flag4=0;
-params.g=9.81; 
+params.g=9.81;
 params.m1=45; %mass of counter weight
 params.m2=5; %mass of arm
 params.m3=20; %mass of frame
@@ -60,4 +58,3 @@ grid on;
 
 max_height=params.max_height
 Distance=params.Distance
-
