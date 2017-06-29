@@ -1,15 +1,15 @@
-function run_sim(;g=9.81
-m1=45 #mass of counter weight
-m2=5  #mass of arm
-m3=20   #mass of frame
-m4=0.15   #mass of ball
-l1=-0.75   #length of pivot to arm CG
-l2=0.5   #length of short arm
-l3=0.6   #length of counter weight
-l4=2   #length of long arm
-l5=2   #length of string
-I=2.6   #inertia of arm
-theta0=48   #start angle
+function run_sim(;g=9.81,
+m1=45, #mass of counter weight
+m2=5,  #mass of arm
+m3=20,   #mass of frame
+m4=0.15,   #mass of ball
+l1=-0.75,   #length of pivot to arm CG
+l2=0.5,   #length of short arm
+l3=0.6,   #length of counter weight
+l4=2,   #length of long arm
+l5=2,   #length of string
+I=2.6,   #inertia of arm
+theta0=48,   #start angle
 ReleaseAngle=45 #parameter name changed
 )
 
