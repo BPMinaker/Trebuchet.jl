@@ -36,7 +36,7 @@ function param_list(; # ; distinguishes params based on the names
   theta0=0,   #start angle
   ReleaseAngle=0 #parameter name changed
 )
-  new (g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle)
+  new(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle)
 end #for function
 
 end #for type
