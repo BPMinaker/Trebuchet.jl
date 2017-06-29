@@ -13,10 +13,6 @@ l5=2
 I=2.6
 theta0=0.48
 Release_angle=45
-flag1=params.flag1
-flag2=params.flag2
-flag3=params.flag3
-flag4=params.flag4
 
 theta1=xx[1] #[] should be used for array
 theta2=xx[2]
@@ -28,7 +24,6 @@ dtheta2=xx[7]
 du=xx[8]
 dx=xx[9]
 dy=xx[10]
-
 
 M=[(m1+m2)*l2^2+I+m2*l1^2 -sin(theta1-theta2)*m1*l2*l3 -(m1+m2)*l2*sin(theta1) 0 0
     -sin(theta1-theta2)*m1*l2*l3 m1*l3^2 m1*l3*cos(theta2) 0 0
