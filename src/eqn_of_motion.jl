@@ -1,4 +1,5 @@
 function eqn_of_motion(t,xx)
+#blah
 
 theta1=xx[1] #[] should be used for array
 theta2=xx[2]
