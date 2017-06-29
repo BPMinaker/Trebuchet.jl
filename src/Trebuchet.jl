@@ -22,18 +22,18 @@ type param_list
   ReleaseAngle::Float64
 
 function param_list(; # ; distinguishes params based on the names
-  g=0
-  m1=0 #mass of counter weight
-  m2=0  #mass of arm
-  m3=0   #mass of frame
-  m4=0   #mass of ball
-  l1=0   #length of pivot to arm CG
-  l2=0   #length of short arm
-  l3=0   #length of counter weight
-  l4=0   #length of long arm
-  l5=0   #length of string
-  I=0   #inertia of arm
-  theta0=0   #start angle
+  g=0,
+  m1=0, #mass of counter weight
+  m2=0,  #mass of arm
+  m3=0,   #mass of frame
+  m4=0,   #mass of ball
+  l1=0,   #length of pivot to arm CG
+  l2=0,   #length of short arm
+  l3=0,   #length of counter weight
+  l4=0,   #length of long arm
+  l5=0,   #length of string
+  I=0,  #inertia of arm
+  theta0=0,   #start angle
   ReleaseAngle=0 #parameter name changed
 )
   new (g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle)
