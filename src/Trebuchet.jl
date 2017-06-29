@@ -21,7 +21,7 @@ type param_list
   theta0::Float64
   ReleaseAngle::Float64
 
-function param_list(;# ; distinguishes params based on the names
+function param_list(# ; distinguishes params based on the names
   g=0.0,
   m1=0.0, #mass of counter weight
   m2=0.0,  #mass of arm

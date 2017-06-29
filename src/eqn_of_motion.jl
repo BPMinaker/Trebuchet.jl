@@ -1,19 +1,5 @@
 function eqn_of_motion(t,xx)
 
-g=-9.81 #Value updated
-m1=45
-m2=5
-m3=20
-m4=0.15
-l1=-0.75
-l2=0.5
-l3=0.6
-l4=2
-l5=2
-I=2.6
-theta0=0.48
-Release_angle=45
-
 theta1=xx[1] #[] should be used for array
 theta2=xx[2]
 u=xx[3]
@@ -31,12 +17,8 @@ M=[(m1+m2)*l2^2+I+m2*l1^2 -sin(theta1-theta2)*m1*l2*l3 -(m1+m2)*l2*sin(theta1) 0
     0 0 0 m4 0
     0 0 0 0 m4]
 
-
-
 B=[2*l4*u*sin(theta1)-2*l4*x*sin(theta1)+2*l4*y*cos(theta1) 0 2*u-2*x-2*l4*cos(theta1) 2*x-2*u+2*l4*cos(theta1) 2*y+2*l4*sin(theta1)
     0 0 0 0 1]
-
-
 
 f=[-cos(theta1-theta2)*m1*l2*l3*dtheta2^2-m1*g*l2*cos(theta1)-m2*g*l1*cos(theta1)
     cos(theta1-theta2)*m1*l2*l3*dtheta1^2-m1*g*l3*sin(theta2)
@@ -44,11 +26,7 @@ f=[-cos(theta1-theta2)*m1*l2*l3*dtheta2^2-m1*g*l2*cos(theta1)-m2*g*l1*cos(theta1
     0
     -m4*g]
 
-
-
 NdBdq=[-(2*l4*sin(theta1)*du+2*l4*u*cos(theta1)*dtheta1-2*l4*sin(theta1)*dx-2*l4*x*cos(theta1)*dtheta1+2*l4*cos(theta1)*dy-2*l4*y*sin(theta1)*dtheta1)*dtheta1-(2*du-2*dx+2*l4*sin(theta1)*dtheta1)*du-(2*dx-2*du-2*l4*sin(theta1)*dtheta1)*dx-(2*dy+2*l4*cos(theta1)*dtheta1)*dy  0]
-
-
 
 lmd=(B*(M\B'))\((B*(M\f))+(-NdBdq))
 d2q=M\(-B'*lmd+f)
