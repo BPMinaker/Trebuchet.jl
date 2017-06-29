@@ -1,35 +1,33 @@
-function trebuchet(t,xx)
+function eqn_of_motion(t,xx)
 
-g=params.g
-m1=params.m1
-m2=params.m2
-m3=params.m3
-m4=params.m4
-l1=params.l1
-l2=params.l2
-l3=params.l3
-l4=params.l4
-l5=params.l5
-I=params.I
-theta0=params.theta0
-Release_angle=params.Release_angle
+g=-9.81 #Value updated
+m1=45
+m2=5
+m3=20
+m4=0.15
+l1=-0.75
+l2=0.5
+l3=0.6
+l4=2
+l5=2
+I=2.6
+theta0=0.48
+Release_angle=45
 flag1=params.flag1
 flag2=params.flag2
 flag3=params.flag3
 flag4=params.flag4
 
-
-
-theta1=xx(1)
-theta2=xx(2)
-u=xx(3)
-x=xx(4)
-y=xx(5)
-dtheta1=xx(6)
-dtheta2=xx(7)
-du=xx(8)
-dx=xx(9)
-dy=xx(10)
+theta1=xx[1] #[] should be used for array
+theta2=xx[2]
+u=xx[3]
+x=xx[4]
+y=xx[5]
+dtheta1=xx[6]
+dtheta2=xx[7]
+du=xx[8]
+dx=xx[9]
+dy=xx[10]
 
 
 M=[(m1+m2)*l2^2+I+m2*l1^2 -sin(theta1-theta2)*m1*l2*l3 -(m1+m2)*l2*sin(theta1) 0 0
@@ -63,18 +61,18 @@ d2q=M\(-B'*lmd+f)
 
 
 
-ra=atan(xx(10)/xx(9))
+ra=atan2(dy,dx) #updated
 if ((lmd(2)>0) || (flag1==1))
-    lmd=(B(1,:)*(M\B(1,:)'))\((B(1,:)*(M\f))+(-NdBdq(1,:)))
-    d2q=M\((-B(1,:)'*lmd)+f)
+    lmd=(B[1,:]'*(M\B[1,:]))\((B[1,:]'*(M\f))+(-NdBdq[1,:]))
+    d2q=M\((-B[1,:]*lmd)+f)
     params.flag1=1
     if ((ra<=Release_angle*(pi/180) && ra>0.00001) || (flag2==1))
         if (flag2==0)
             actual_Release_angle=ra*(180/pi)
-            string_angle=asin((xx(5)+l4*sin(theta1))/l5)*(180/pi)
-            Release_X_velocity=xx(9)
-            Release_Y_velocity=xx(10)
-            Release_combined_velocity=sqrt(xx(9)^2+xx(10)^2)
+            string_angle=asin((y+l4*sin(theta1))/l5)*(180/pi)
+            Release_X_velocity=dx
+            Release_Y_velocity=dy
+            Release_combined_velocity=sqrt(dx^2+dy^2)
             Release_t=t
         end
         d2q=M\f
@@ -85,23 +83,25 @@ end
 
 
 
-if ((xx(10)<=-0.000001) && (flag3==0))
-    params.max_height=xx(5)
+if ((dy<=-0.000001) && (flag3==0))
+    params.max_height=y
     params.flag3=1
 end
 
 
-if((xx(5)<=(-l4*sin(theta0*(pi/180))-0.000001)) && (flag4==0))
+if((y<=(-l4*sin(theta0*(pi/180))-0.000001)) && (flag4==0))
     Landing_time=t
-    params.Distance=xx(4)
+    params.Distance=x
     params.flag4=1
 end
 
 # pause()
 
-xxdot(1,:)=xx(6)
-xxdot(2,:)=xx(7)  
-xxdot(3,:)=xx(8)
-xxdot(4,:)=xx(9)
-xxdot(5,:)=xx(10)
-xxdot(6:10,:)=d2q
+xxdot[1]=dtheta1
+xxdot[2]=dtheta2
+xxdot[3]=du
+xxdot[4]=dx
+xxdot[5]=dy
+xxdot[6:10]=d2q
+
+end
