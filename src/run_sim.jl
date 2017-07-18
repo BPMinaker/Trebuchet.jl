@@ -1,3 +1,6 @@
+using DifferentialEquations
+using Plots
+
 function run_sim(;g=9.81,
 m1=45.0, #mass of counter weight
 m2=5.0,  #mass of arm
@@ -25,17 +28,15 @@ flag4=0
 MaxHeight=0 #parameter name changed
 Distance=0
 
-# using DifferentialEquations
-#
-# tout=(0,10)
-# x0=[theta0*(pi/180), 0, 0, l5-cos(theta0*(pi/180))*l4, -l4*sin(theta0*(pi/180)), 0, 0, 0, 0, 0]
-# prob=ODEProblem(eqn_of_motion,x0, tout)
-# sol=solve(prob)
-#
-# using Plots
+# WE NEED TO UPDATE FROM HERE
+dummy(t,xx)=eqn_of_motion(t,xx,params)
+tout=(0,10)
+x0=[theta0*(pi/180), 0, 0, l5-cos(theta0*(pi/180))*l4, -l4*sin(theta0*(pi/180)), 0, 0, 0, 0, 0]
+prob=ODEProblem(dummy,x0, tout) #eqn_of_motion needs to read parameters as well
+sol=solve(prob)
+# UPTO HERE
 
-
-#max_height=params.max_height #ignored for now
-#Distance=params.Distance #ignored for now
+max_height=params.max_height #ignored for now
+Distance=params.Distance #ignored for now
 
 end

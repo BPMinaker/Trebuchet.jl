@@ -1,5 +1,4 @@
-function eqn_of_motion(t,xx)
-#blah
+function eqn_of_motion(t,xx,params)
 
 theta1=xx[1] #[] should be used for array
 theta2=xx[2]
@@ -11,6 +10,22 @@ dtheta2=xx[7]
 du=xx[8]
 dx=xx[9]
 dy=xx[10]
+
+g=params.g
+m1=params.m1 #mass of counter weight
+m2=params.m2  #mass of arm
+m3=params.m3   #mass of frame
+m4=params.m4   #mass of ball
+l1=params.l1   #length of pivot to arm CG
+l2=params.l2   #length of short arm
+l3=params.l3   #length of counter weight
+l4=params.l4   #length of long arm
+l5=params.l5   #length of string
+I=params.I  #inertia of arm
+theta0=params.theta0   #start angle
+ReleaseAngle=params.ReleaseAngle #parameter name changed
+
+
 
 M=[(m1+m2)*l2^2+I+m2*l1^2 -sin(theta1-theta2)*m1*l2*l3 -(m1+m2)*l2*sin(theta1) 0 0
     -sin(theta1-theta2)*m1*l2*l3 m1*l3^2 m1*l3*cos(theta2) 0 0
