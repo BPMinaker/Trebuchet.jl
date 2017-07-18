@@ -25,8 +25,6 @@ I=params.I  #inertia of arm
 theta0=params.theta0   #start angle
 ReleaseAngle=params.ReleaseAngle #parameter name changed
 
-
-
 M=[(m1+m2)*l2^2+I+m2*l1^2 -sin(theta1-theta2)*m1*l2*l3 -(m1+m2)*l2*sin(theta1) 0 0
     -sin(theta1-theta2)*m1*l2*l3 m1*l3^2 m1*l3*cos(theta2) 0 0
     -(m1+m2)*l2*sin(theta1) m1*l3*cos(theta2) m1+m2+m3 0 0
@@ -42,21 +40,24 @@ f=[-cos(theta1-theta2)*m1*l2*l3*dtheta2^2-m1*g*l2*cos(theta1)-m2*g*l1*cos(theta1
     0
     -m4*g]
 
-NdBdq=[-(2*l4*sin(theta1)*du+2*l4*u*cos(theta1)*dtheta1-2*l4*sin(theta1)*dx-2*l4*x*cos(theta1)*dtheta1+2*l4*cos(theta1)*dy-2*l4*y*sin(theta1)*dtheta1)*dtheta1-(2*du-2*dx+2*l4*sin(theta1)*dtheta1)*du-(2*dx-2*du-2*l4*sin(theta1)*dtheta1)*dx-(2*dy+2*l4*cos(theta1)*dtheta1)*dy  0]
+NdBdq=[-(2*l4*sin(theta1)*du+2*l4*u*cos(theta1)*dtheta1-2*l4*sin(theta1)*dx-2*l4*x*cos(theta1)*dtheta1+2*l4*cos(theta1)*dy-2*l4*y*sin(theta1)*dtheta1)*dtheta1-(2*du-2*dx+2*l4*sin(theta1)*dtheta1)*du-(2*dx-2*du-2*l4*sin(theta1)*dtheta1)*dx-(2*dy+2*l4*cos(theta1)*dtheta1)*dy
+0]
 
-lmd=(B*(M\B'))\((B*(M\f))+(-NdBdq))
+lmd=(B*(M\B'))\((B*(M\f))-NdBdq)
 d2q=M\(-B'*lmd+f)
 
 
-
-
+#Fix the Dimension from here July 17, 2017
 ra=atan2(dy,dx) #updated
-if ((lmd(2)>0) || (flag1==1))
+if (lmd[2]>0 || params.flag1)
+
+  println(size(B[1,:])) #[5,]
     lmd=(B[1,:]'*(M\B[1,:]))\((B[1,:]'*(M\f))+(-NdBdq[1,:]))
+      println(size(lmd)) # [2,]
     d2q=M\((-B[1,:]*lmd)+f)
-    params.flag1=1
-    if ((ra<=Release_angle*(pi/180) && ra>0.00001) || (flag2==1))
-        if (flag2==0)
+    params.flag1=true
+    if ((ra<=Release_angle*(pi/180) && ra>0.00001) || params.flag2)
+        if (params.flag2==false)
             actual_Release_angle=ra*(180/pi)
             string_angle=asin((y+l4*sin(theta1))/l5)*(180/pi)
             Release_X_velocity=dx
@@ -65,32 +66,31 @@ if ((lmd(2)>0) || (flag1==1))
             Release_t=t
         end
         d2q=M\f
-        params.flag2=1
+        params.flag2=true
     end
 end
 
 
 
 
-if ((dy<=-0.000001) && (flag3==0))
+if (dy<=-0.000001 && ~params.flag3)
     params.max_height=y
-    params.flag3=1
+    params.flag3=true
 end
 
 
-if((y<=(-l4*sin(theta0*(pi/180))-0.000001)) && (flag4==0))
+if(y<=(-l4*sin(theta0*(pi/180))-0.000001) && ~params.flag4)
     Landing_time=t
     params.Distance=x
-    params.flag4=1
+    params.flag4=true
 end
 
 # pause()
 
-xxdot[1]=dtheta1
-xxdot[2]=dtheta2
-xxdot[3]=du
-xxdot[4]=dx
-xxdot[5]=dy
-xxdot[6:10]=d2q
+xxdot=[dtheta1, dtheta2, du, dx, dy, d2q[1], d2q[2], d2q[3], d2q[4], d2q[5]]
+
+println(xxdot)
+
+xxdot
 
 end
