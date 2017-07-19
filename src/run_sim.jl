@@ -14,23 +14,17 @@ l5=2.0,   #length of string
 I=2.6,   #inertia of arm
 theta0=48.0,   #start angle
 ReleaseAngle=45.0, #parameter name changed
+MaxHeight=0.0, #parameter name changed
+Distance=0.0, #parameter name changed
 flag1=false, #Test1
 flag2=false,
 flag3=false,
 flag4=false #upto here
 )
 
-params=param_list(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle,flag1,flag2,flag3,flag4)
+params=param_list(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle,MaxHeight,Distance,flag1,flag2,flag3,flag4)
 
 println(params)
-
-#flag1=0 #Test1
-#flag2=0
-#flag3=0
-#flag4=0 #upto here
-
-MaxHeight=0 #parameter name changed
-Distance=0
 
 dummy(t,xx)=eqn_of_motion(t,xx,params)
 tout=(0.0,10.0)
@@ -38,7 +32,7 @@ x0=[theta0*(pi/180), 0.0, 0.0, l5-cos(theta0*(pi/180))*l4, -l4*sin(theta0*(pi/18
 prob=ODEProblem(dummy,x0, tout)
 sol=solve(prob)
 
-max_height=params.max_height #ignored for now
-Distance=params.Distance #ignored for now
+MaxHeight=params.MaxHeight #name changed
+Distance=params.Distance #working now
 
 end

@@ -20,6 +20,8 @@ type param_list
   I::Float64
   theta0::Float64
   ReleaseAngle::Float64
+  MaxHeight::Float64
+  Distance::Float64
   flag1::Bool #Test1
   flag2::Bool
   flag3::Bool
@@ -39,12 +41,14 @@ function param_list(# ; distinguishes params based on the names
   I=0.0,  #inertia of arm
   theta0=0.0,   #start angle
   ReleaseAngle=0.0, #parameter name changed
-  flag1=false, #Test1
-  flag2=false, #Test1
-  flag3=false, #Test1
-  flag4=false #Test1
+  MaxHeight=0.0, #parameter name changed
+  Distance=0.0, #parameter name changed
+  flag1=false,
+  flag2=false,
+  flag3=false,
+  flag4=false
 )
-  new(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle,flag1,flag2,flag3,flag4)
+  new(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle,MaxHeight,Distance,flag1,flag2,flag3,flag4)
 end #for function
 
 end #for type

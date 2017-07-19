@@ -24,6 +24,8 @@ l5=params.l5   #length of string
 I=params.I  #inertia of arm
 theta0=params.theta0   #start angle
 ReleaseAngle=params.ReleaseAngle #parameter name changed
+MaxHeight=params.MaxHeight #parameter name changed
+Distance=params.Distance #working now
 
 M=[(m1+m2)*l2^2+I+m2*l1^2 -sin(theta1-theta2)*m1*l2*l3 -(m1+m2)*l2*sin(theta1) 0 0
     -sin(theta1-theta2)*m1*l2*l3 m1*l3^2 m1*l3*cos(theta2) 0 0
@@ -52,13 +54,13 @@ ra=atan2(dy,dx) #updated
 if (lmd[2]>0 || params.flag1)
 
   println(size(B[1,:])) #[5,]
-    lmd=(B[1,:]'*(M\B[1,:]))\((B[1,:]'*(M\f))+(-NdBdq[1,:]))
+    lmd=(B[1,:]'*(M\B[1,:]))\((B[1,:]'*(M\f))+(-NdBdq[1,:]'))
       println(size(lmd)) # [2,]
     d2q=M\((-B[1,:]*lmd)+f)
     params.flag1=true
-    if ((ra<=Release_angle*(pi/180) && ra>0.00001) || params.flag2)
+    if ((ra<=params.ReleaseAngle*(pi/180) && ra>0.00001) || params.flag2)
         if (params.flag2==false)
-            actual_Release_angle=ra*(180/pi)
+            actual_ReleaseAngle=ra*(180/pi)
             string_angle=asin((y+l4*sin(theta1))/l5)*(180/pi)
             Release_X_velocity=dx
             Release_Y_velocity=dy
@@ -70,11 +72,8 @@ if (lmd[2]>0 || params.flag1)
     end
 end
 
-
-
-
 if (dy<=-0.000001 && ~params.flag3)
-    params.max_height=y
+    params.MaxHeight=y
     params.flag3=true
 end
 
@@ -88,8 +87,6 @@ end
 # pause()
 
 xxdot=[dtheta1, dtheta2, du, dx, dy, d2q[1], d2q[2], d2q[3], d2q[4], d2q[5]]
-
-println(xxdot)
 
 xxdot
 
