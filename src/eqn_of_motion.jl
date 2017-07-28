@@ -66,7 +66,7 @@ NdBdq=[-(2*params.l4*sin(theta1)*du+2*params.l4*u*cos(theta1)*dtheta1-2*params.l
 lmd=(B*(M\B'))\((B*(M\f))-NdBdq)
 d2q=M\(-B'*lmd+f)
 
-
+# below can be used for the debugging process
 # println("M=", M)
 # println("B=", B)
 # println("f=", f)
