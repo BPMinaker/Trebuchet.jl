@@ -24,8 +24,8 @@ type param_list
   Distance::Float64
   flag1::Bool #Test1
   flag2::Bool
-  flag3::Bool
-  flag4::Bool #upto here
+#  flag3::Bool
+#  flag4::Bool #upto here
 
 function param_list(# ; distinguishes params based on the names
   g=0.0,
@@ -44,11 +44,11 @@ function param_list(# ; distinguishes params based on the names
   MaxHeight=0.0, #parameter name changed
   Distance=0.0, #parameter name changed
   flag1=false,
-  flag2=false,
-  flag3=false,
-  flag4=false
+  flag2=false
+#  flag3=false,
+#  flag4=false
 )
-  new(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle,MaxHeight,Distance,flag1,flag2,flag3,flag4)
+  new(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle,MaxHeight,Distance,flag1,flag2) #flag3,4 deleted
 end #for function
 
 end #for type

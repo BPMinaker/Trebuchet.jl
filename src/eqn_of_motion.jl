@@ -78,21 +78,28 @@ ra=atan2(dy,dx)
 if (lmd[2]>0 || params.flag1)
     lmd=(B[1,:]'*(M\B[1,:]))\((B[1,:]'*(M\f))+(-NdBdq[1,:]'))
     d2q=M\((-B[1,:]*lmd)+f)
+    if(~params.flag1)
+      println("Lift Off Time= ",t)
+    end
     params.flag1=true
     if ((ra<=params.ReleaseAngle*(pi/180) && ra>0.00001) || params.flag2)
-        if (params.flag2==false)
+        if (~params.flag2)
             actual_ReleaseAngle=ra*(180/pi)
             string_angle=asin((y+params.l4*sin(theta1))/params.l5)*(180/pi)
             Release_X_velocity=dx
             Release_Y_velocity=dy
             Release_combined_velocity=sqrt(dx^2+dy^2)
             Release_t=t
+            Release_x=x
+            Release_y=y
             println("Actual Release Angle= ", actual_ReleaseAngle)
             println("String Angle= ",string_angle)
             println("Release X velocity= ",Release_X_velocity)
             println("Release Y velocity= ",Release_Y_velocity)
             println("Release Combined velocity= ", Release_combined_velocity)
             println("Release time= ",Release_t)
+            println("Release x= ",Release_x)
+            println("Release y= ",Release_y)
         end
         d2q=M\f
         params.flag2=true
@@ -101,17 +108,20 @@ end
 
 if (dy<=-0.000001 && ~params.flag3)
     params.MaxHeight=y
+    if(~params.flag3)
+      println("Max Height Time= ",t)
+    end
     params.flag3=true
     println("Max Height= ", params.MaxHeight) #result: 54.95, MATLAB: 45.6526
 end
 
-if(y<=(-params.l4*sin(params.theta0*(pi/180))-0.000001) && ~params.flag4)
-    Landing_time=t #result: 0.3976, MATLAB: 6.7568
-    params.Distance=x#result: -0.5510, MATLAB: 173.0543
-    params.flag4=true
-    println("Landingtime= ", Landing_time)
-    println("Distance= ", params.Distance)
-end
+#if(y<=(-params.l4*sin(params.theta0*(pi/180))-0.000001) && ~params.flag4)
+#    Landing_time=t #result: 0.3976, MATLAB: 6.7568
+#    params.Distance=x#result: -0.5510, MATLAB: 173.0543
+#    params.flag4=true
+#    println("Landingtime= ", Landing_time)
+#    println("Distance= ", params.Distance)
+#end
 # pause()
 
 xxdot=[dtheta1, dtheta2, du, dx, dy, d2q[1], d2q[2], d2q[3], d2q[4], d2q[5]]
