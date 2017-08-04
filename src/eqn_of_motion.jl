@@ -24,26 +24,8 @@ l5=params.l5   #length of string
 I=params.I  #inertia of arm
 theta0=params.theta0   #start angle
 ReleaseAngle=params.ReleaseAngle #parameter name changed
-MaxHeight=params.MaxHeight #parameter name changed
-Distance=params.Distance #parameter name changed
-
-#M=[(m1+m2)*l2^2+I+m2*l1^2 -sin(theta1-theta2)*m1*l2*l3 -(m1+m2)*l2*sin(theta1) 0 0
-#    -sin(theta1-theta2)*m1*l2*l3 m1*l3^2 m1*l3*cos(theta2) 0 0
-#    -(m1+m2)*l2*sin(theta1) m1*l3*cos(theta2) m1+m2+m3 0 0
-#    0 0 0 m4 0
-#    0 0 0 0 m4] #without .params for m1,m2,l2,l3
-
-#B=[2*l4*u*sin(theta1)-2*l4*x*sin(theta1)+2*l4*y*cos(theta1) 0 2*u-2*x-2*l4*cos(theta1) 2*x-2*u+2*l4*cos(theta1) 2*y+2*l4*sin(theta1)
-#    0 0 0 0 1] #without .params for l4
-
-#f=[-cos(theta1-theta2)*m1*l2*l3*dtheta2^2-m1*g*l2*cos(theta1)-m2*g*l1*cos(theta1)
-#    cos(theta1-theta2)*m1*l2*l3*dtheta1^2-m1*g*l3*sin(theta2)
-#    (m1+m2)*l2*cos(theta1)*dtheta1^2+m1*l3*sin(theta2)*dtheta2^2
-#    0
-#    -m4*g] #without .params for m1,m2,l1,l2,l3,g
-
-#NdBdq=[-(2*l4*sin(theta1)*du+2*l4*u*cos(theta1)*dtheta1-2*l4*sin(theta1)*dx-2*l4*x*cos(theta1)*dtheta1+2*l4*cos(theta1)*dy-2*l4*y*sin(theta1)*dtheta1)*dtheta1-(2*du-2*dx+2*l4*sin(theta1)*dtheta1)*du-(2*dx-2*du-2*l4*sin(theta1)*dtheta1)*dx-(2*dy+2*l4*cos(theta1)*dtheta1)*dy
-#0] #without .params for l4
+# MaxHeight=params.MaxHeight #parameter name changed
+# Distance=params.Distance #parameter name changed
 
 M=[(params.m1+params.m2)*params.l2^2+params.I+params.m2*params.l1^2 -sin(theta1-theta2)*params.m1*params.l2*params.l3 -(params.m1+params.m2)*params.l2*sin(theta1) 0 0
     -sin(theta1-theta2)*params.m1*params.l2*params.l3 params.m1*params.l3^2 params.m1*params.l3*cos(theta2) 0 0
@@ -65,14 +47,6 @@ NdBdq=[-(2*params.l4*sin(theta1)*du+2*params.l4*u*cos(theta1)*dtheta1-2*params.l
 
 lmd=(B*(M\B'))\((B*(M\f))-NdBdq)
 d2q=M\(-B'*lmd+f)
-
-# below can be used for the debugging process
-# println("M=", M)
-# println("B=", B)
-# println("f=", f)
-# println("NdBdq=", NdBdq)
-# println("lmd=", lmd)
-# println("d2q=", d2q)
 
 ra=atan2(dy,dx)
 if (lmd[2]>0 || params.flag1)
@@ -105,24 +79,6 @@ if (lmd[2]>0 || params.flag1)
         params.flag2=true
     end
 end
-
-if (dy<=-0.000001 && ~params.flag3)
-    params.MaxHeight=y
-    if(~params.flag3)
-      println("Max Height Time= ",t)
-    end
-    params.flag3=true
-    println("Max Height= ", params.MaxHeight) #result: 54.95, MATLAB: 45.6526
-end
-
-#if(y<=(-params.l4*sin(params.theta0*(pi/180))-0.000001) && ~params.flag4)
-#    Landing_time=t #result: 0.3976, MATLAB: 6.7568
-#    params.Distance=x#result: -0.5510, MATLAB: 173.0543
-#    params.flag4=true
-#    println("Landingtime= ", Landing_time)
-#    println("Distance= ", params.Distance)
-#end
-# pause()
 
 xxdot=[dtheta1, dtheta2, du, dx, dy, d2q[1], d2q[2], d2q[3], d2q[4], d2q[5]]
 
