@@ -41,7 +41,7 @@ st21*m1*l2*l3 m1*l3^2 m1*l3*ct2 0 0;
 0 0 0 m4 0;
 0 0 0 0 m4]
 
-B=[2*l4*u*st1-2*l4*x*st1+2*l4*y*ct1 0 2*u-2*x-2*l4*ct1 2*x-2*u+2*l4*ct1 2*y+2*l4*st1;
+B=[2*l4*(u*st1-x*st1+y*ct1) 0 2*(u-x-l4*ct1) 2*(x-u+l4*ct1) 2*(y+l4*st1);
 0 0 0 0 1]
 
 f=[-ct12*m1*l2*l3*dtheta2^2-m1*g*l2*ct1-m2*g*l1*ct1
@@ -50,7 +50,7 @@ ct12*m1*l2*l3*dtheta1^2-m1*g*l3*st2
 0
 -m4*g]
 
-NdBdq=[-(2*l4*st1*du+2*l4*u*ct1*dtheta1-2*l4*st1*dx-2*l4*x*ct1*dtheta1+2*l4*ct1*dy-2*l4*y*st1*dtheta1)*dtheta1-(2*du-2*dx+2*l4*st1*dtheta1)*du-(2*dx-2*du-2*l4*st1*dtheta1)*dx-(2*dy+2*l4*ct1*dtheta1)*dy
+NdBdq=2*[-l4*(st1*du+u*ct1*dtheta1-st1*dx-x*ct1*dtheta1+ct1*dy-y*st1*dtheta1)*dtheta1-(du-dx+l4*st1*dtheta1)*du-(dx-du-l4*st1*dtheta1)*dx-(dy+l4*ct1*dtheta1)*dy
 0]
 
 lmd=(B*(M\B'))\((B*(M\f))-NdBdq)
