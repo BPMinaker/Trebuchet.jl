@@ -45,6 +45,6 @@ for i=1:length(sol.u)
 	y[:,i]=sol.u[i]
 end
 
-plot(y[4,:],y[5,:],show=true)
-#plot(sol, vars=(4,5),show=true)
+plot(y[4,:],y[5,:]+h,show=true)
+
 end

@@ -80,7 +80,7 @@ if (lmd[2]>0 || params.flag1)
 			println("Release Combined velocity= ", Release_combined_velocity)
 			println("Release time= ",Release_t)
 			println("Release x= ",Release_x)
-			println("Release y= ",Release_y)
+			println("Release y= ",Release_y+params.h)
 		end
 		d2q=M\f
 		params.flag2=true
