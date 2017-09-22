@@ -36,7 +36,7 @@ println("Inital arm angle=",asin(h/l4)*180/pi)
 dummy(t,xx)=eqn_of_motion(t,xx,params)
 
 tout=(0.0,4.0)
-x0=[asin(h/l4), 0.0, 0.0,l5-sqrt(l4^2-h^2), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+x0=[asin(h/l4), 0.0, 0.0,l5-sqrt(l4^2-h^2), -h, 0.0, 0.0, 0.0, 0.0, 0.0]
 prob=ODEProblem(dummy,x0,tout)
 sol=solve(prob,DP5(),saveat=0.005,abstol=1e-8,reltol=1e-8)
 plot(sol, vars=(4,5),show=true)
