@@ -40,7 +40,7 @@ x0=[asin(h/l4), 0.0, 0.0,l5-sqrt(l4^2-h^2), -h, 0.0, 0.0, 0.0, 0.0, 0.0]
 prob=ODEProblem(dummy,x0,tout)
 sol=solve(prob,DP5(),saveat=0.005,abstol=1e-8,reltol=1e-8)
 
-y=zeros(5,length(sol.u))
+y=zeros(10,length(sol.u))
 for i=1:length(sol.u)
 	y[:,i]=sol.u[i]
 end
