@@ -22,7 +22,6 @@ l3=params.l3   #length of counter weight
 l4=params.l4   #length of long arm
 l5=params.l5   #length of string
 I=params.I  #inertia of arm
-theta0=params.theta0   #start angle
 ReleaseAngle=params.ReleaseAngle #parameter name changed
 # MaxHeight=params.MaxHeight #parameter name changed
 # Distance=params.Distance #parameter name changed

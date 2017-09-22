@@ -18,7 +18,7 @@ type param_list
   l4::Float64
   l5::Float64
   I::Float64
-  theta0::Float64
+  h::Float64
   ReleaseAngle::Float64
   flag1::Bool #Test1
   flag2::Bool
@@ -34,13 +34,13 @@ function param_list(# ; distinguishes params based on the names
   l3=0.0,   #length of counter weight
   l4=0.0,   #length of long arm
   l5=0.0,   #length of string
-  I=0.0,  #inertia of arm
-  theta0=0.0,   #start angle
+  I=0.0,   #inertia of arm
+  h=0.0,   # pivot height
   ReleaseAngle=0.0, #parameter name changed
   flag1=false,
   flag2=false
 )
-  new(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,theta0,ReleaseAngle,flag1,flag2)
+  new(g,m1,m2,m3,m4,l1,l2,l3,l4,l5,I,h,ReleaseAngle,flag1,flag2)
 end #for function
 
 end #for type
