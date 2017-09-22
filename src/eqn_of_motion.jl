@@ -66,7 +66,7 @@ if (lmd[2]>0 || params.flag1)
 	if ((ra<=ReleaseAngle*(pi/180) && ra>0.00001) || params.flag2)
 		if (~params.flag2)
 			actual_ReleaseAngle=ra*(180/pi)
-#			string_angle=asin((y+l4*st1)/l5)*(180/pi)
+			string_angle=(asin((y+l4*st1)/l5)+theta1)*180/pi
 			Release_X_velocity=dx
 			Release_Y_velocity=dy
 			Release_combined_velocity=sqrt(dx^2+dy^2)
@@ -74,7 +74,7 @@ if (lmd[2]>0 || params.flag1)
 			Release_x=x
 			Release_y=y
 			println("Actual Release Angle= ", actual_ReleaseAngle)
-	#		println("String Angle= ",string_angle)
+			println("String Angle= ",string_angle)
 			println("Release X velocity= ",Release_X_velocity)
 			println("Release Y velocity= ",Release_Y_velocity)
 			println("Release Combined velocity= ", Release_combined_velocity)
